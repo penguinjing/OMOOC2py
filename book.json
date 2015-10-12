@@ -4,9 +4,9 @@
     "author": "OMOOC-support <omooc-support@googlegroups.com>",
 
     "plugins": ["disqus"],
-“pluginsConfig”: {
+"pluginsConfig": {
 "disqus": {
- “shortName":” “httpspenguinjinggitbooksioomooc2py”
+ "shortName": "httpspenguinjinggitbooksioomooc2py"
         }
     }
 }
