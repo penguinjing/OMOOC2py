@@ -6,7 +6,7 @@
     "plugins": ["disqus"],
     "pluginsConfig": {
         "disqus": {
-             "shortName": "httpspenguinjinggitbooksioomooc2py.disqus.com"
+             "shortName": "httpspenguinjinggitbooksioomooc2py"
         }
     }
 }
