@@ -3,19 +3,9 @@
     "description": "OMOOC.py tutorial for teching",
     "author": "OMOOC-support <omooc-support@googlegroups.com>",
 
-    "plugins": [
-        "disqus"
-    ],
-    "pluginsConfig": {
-        "shortName": "Openmindclub"
-    }
-}
-
-{
-"plugins": ["disqus"],
+    "plugins": ["disqus"],
 “pluginsConfig”: {
 "disqus": {
  “shortName":” “httpspenguinjinggitbooksioomooc2py.disqus.com”
-  }
-}
+    }
 }
