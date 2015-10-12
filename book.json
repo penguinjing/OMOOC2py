@@ -11,3 +11,11 @@
     }
 }
 
+{
+"plugins": ["disqus"],
+“pluginsConfig”: {
+"disqus": {
+ “shortName":” “httpspenguinjinggitbooksioomooc2py”
+  }
+}
+}
