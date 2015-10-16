@@ -57,3 +57,14 @@ def foo(param1, secondParam):
 
 if __name__ == '__main__': # if it's running in command line, run following script.
     main() # call main() function.
+
+# 本程序片段使用的程序方法
+# 1. 导入其他模块 - import os 系统模块(os.py)
+# 2. 构造了两个函数 main() - 无参数函数, foo() - 2参数函数.
+# 3. 运行时检测程序状态：a. 由其他程序导入调用，还是b. 直接运行.
+# 4. main()运行内部，可调用第二个函数foo(). 调用函数时可传递参数进入函数foo(param1, secondParam)
+# 5. 使用列表(List)前定义列表, 循环条件for i in food:使用列表作为循环参数。
+# 6. 使用函数range(10), 构造列表(0, 1, 2, 3, 4, 5, 6, 7, 8, 9),  把for i in range(10)，作为循环条件。
+# 7. 调用os模块方法，os.getcwd() getCurrentWorkingDirectory
+# 8. 条件判断 if - elif - else。 函数返回值在函数末尾return.
+# 9. 格式化字符串
