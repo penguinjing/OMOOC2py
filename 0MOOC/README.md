@@ -38,5 +38,7 @@
 Python代码执行理念学习工具
 [Visualize Python code execution](http://www.pythontutor.com/index.html)
 
+[Free programming books](https://github.com/vhf/free-programming-books)
+
 - 151018 Penguin更新
 - 150924 大妈创建
