@@ -5,9 +5,17 @@
 * git
 * github
 
-## Markdown
-* 视频：[GeeK系列-光速上手MarkDown](http://www.bilibili.com/video/av2793636/)
+## Markdown 写作语言
+
+Markdown是种纯文本的标记语言，其语法目标"方便地在网上写作"，在打字的同时把排版也一起解决了，不用像Word里再去调格式。Markdown兼容HTML标签，常用浏览器可以直接读取.md or .markdown文件 (Markdown文件)。很多Markdown的文字编辑器可以直接将Markdown文件输出PDF或HTML文件，便于网上发布。  
+
+Markdown vs. Markdown GFM
+
+Github Favored Markdown(缩写GFM)是Github社会化编程网站采用的一种Mardkown写作语言的扩展，加强了便于在Github网站上写作的特性。
+
+* 视频：[GeeK系列 - 12分钟光速上手MarkDown](http://www.bilibili.com/video/av2793636/)
 * 文档：
+  * [10分钟学会Markdown](http://www.jianshu.com/p/15ab5501f1dc?utm_campaign=hugo&utm_medium=reader_share&utm_content=note&utm_source=weibo)
   * [Git Markdown文档](https://guides.github.com/features/mastering-markdown/)
   * [GFM官方文档](https://help.github.com/articles/github-flavored-markdown/)
   * [GUODongXiaRend的Github Flavored Markdown语法介绍](https://github.com/guodongxiaren/README)
