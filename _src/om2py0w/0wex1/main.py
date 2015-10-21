@@ -4,14 +4,14 @@ from sys import argv
 line = ''
 
 try: 
-    fname = open('argv[1]', 'a')
+    fname = open(argv[1], 'a')
     print fname.read()
 
 except:
-	fname = open('argv[1]', 'w')
+	fname = open(argv[1], 'w')
 
 print 'Please input your dairy here: '
-print 'Please type "finish" if you are done. '
+print 'Type "finish" in a new line if you are done. '
 
 while True:
     line = raw_input('> ')

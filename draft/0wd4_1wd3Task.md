@@ -131,6 +131,14 @@ Ref:
 
 ## 调错 - Debugging
 
+v1
+
+argv[1] 参数变量外面加''，变为字符串(string), 并未正确传递日记文件变量名。  
+`file.open('argv[1]', 'a')`  
+
+更改为：  
+`file.open(argv[1], 'a')`
+
 
 
 ## 进展
