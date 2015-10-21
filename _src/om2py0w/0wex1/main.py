@@ -3,12 +3,10 @@ from sys import argv
 
 line = ''
 
-try: 
-    fname = open(argv[1], 'a')
-    print fname.read()
+fhand = open(argv[1], 'r+')
 
-except:
-	fname = open(argv[1], 'w')
+print 'Here are the dairy lines that you already wrote:'
+print fhand.read()
 
 print 'Please input your dairy here: '
 print 'Type "finish" in a new line if you are done. '
@@ -16,8 +14,9 @@ print 'Type "finish" in a new line if you are done. '
 while True:
     line = raw_input('> ')
     if line == 'finish':
-    	break
-    fname.write('%s \n'), line
+        break
+    fhand.seek(0, 2)
+    fhand.write(line + '\n')
 
-print 'Ok, done. The dairy was saved. Thanks for using the mini dairy writer.'
-fname.close()
+print 'The dairy was saved. Thanks for using Mini Dairy Writer.'
+fhand.close()

@@ -131,13 +131,74 @@ Ref:
 
 ## 调错 - Debugging
 
-v1
-
+#### v1  
 argv[1] 参数变量外面加''，变为字符串(string), 并未正确传递日记文件变量名。  
 `file.open('argv[1]', 'a')`  
 
 更改为：  
 `file.open(argv[1], 'a')`
+
+#### v2  
+文件写入方法(method)  
+`fname.write('%s \n') line`
+
+发现敲错，更改为的:  
+`fname.write('%s \n') % line`
+
+还是不行。看来file.write() 方法括号内不支持采用格式化字符方式，替换变量字符+'\n' (newline回车行)  ,   
+尝试更改为：  
+`fname.write(line + '\n') `
+
+运行程序系统仍提示错误:  
+```  
+  File "main.py", line 8
+    fname = open(argv[1], 'a')
+                             ^
+IndentationError: unindent does not match any outer indentation level
+```  
+
+看起来命令行提醒是对齐错误，检查前后的括号用法没有错误。  
+无意中选中全部代码，发现:
+```
+  print argv[1]  => 这一行最前端是回车在Sublime Text中自动生成的Tab制表符，要死，如不是全部选中还看不出是空格。
+    fname = open(argv[1], 'a')
+    print fname.read()
+```
+
+替换全部Tab制表符为空格。全选所有代码，检查是否修改完成。
+
+再运行程序，系统提示file.open() 打开模式不对。
+```  
+用Google搜索: python file.open mode
+```
+第一个链接：
+[Python built-in open function: difference between modes](http://stackoverflow.com/questions/1466000/python-open-built-in-function-difference-between-modes-a-a-w-w-and-r)  
+看过该链接信息后, 确定应该用 `file.open(r+)` 方式打开。
+
+继续运行程序，系统在用户输入完一行文字按回车键后，继续报错（命真苦呀）:  
+```  
+Traceback (most recent call last):
+  File "main.py", line 17, in <module>
+    fhand.write(line + '\n')
+IOError: [Errno 0] Error
+```
+
+前后尝试修改半小时，没有头绪。只有放弃先去洗澡。中间想到既然上面file.open()模式的问题，那file.write() 也可以用同样关键字`python file.write mode`模式搜索得来. Google后看了前三个文档仍没头绪。
+
+突然一下想到应把报错代码输入Google 当关键字再搜索下: `IOError: Errno 0`  
+第二个结果吸引了我。[Python - IOError: [Errno 0] Error. What is Triggering this Error](http://stackoverflow.com/questions/19283118/python-ioerror-errno-0-error-what-is-triggering-this-error-in-my-code)
+
+从这篇文档说明，我看到file.read()执行完后，文件指针指向末尾EOF。  
+其建议在 `file.write()` 之前添加一句: `file.seek(0, 2) #`
+
+不明觉厉，只能再搜索下[Python官方文档](/docs.python.org/2) 确认其用法，发现关于[file.seek的说明](https://docs.python.org/2/library/stdtypes.html?highlight=file.seek#file.seek) 
+
+Bingo! 看来就是它了. 新增进代码中, 运行测试ok, 解决问题收工睡觉. 
+
+回想下这8小时编程调试，还是花太多时间困在自己头脑中运行调试除错上。
+
+* 应该牢记任务目标，以最小成本完成任务。
+* 不断用Google 搜索错误代码/错误线索，搜索官方文档，可以更早解决问题。
 
 
 
