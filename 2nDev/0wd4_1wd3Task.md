@@ -129,7 +129,7 @@ Ref:
 [open() 2. Built-in Functions - Python 2.7.10 documentation](https://docs.python.org/2/library/functions.html?highlight=raw_input#open)  
 [5.Built-in Types - Python 2.7.10 documentation](https://docs.python.org/2/library/stdtypes.html#file.readline)  
 
-## 调错 - Debugging
+## 版本调错 迭代- Debugging
 
 #### v1  
 argv[1] 参数变量外面加''，变为字符串(string), 并未正确传递日记文件变量名。  
@@ -150,13 +150,12 @@ argv[1] 参数变量外面加''，变为字符串(string), 并未正确传递日
 `fname.write(line + '\n') `
 
 运行程序系统仍提示错误:  
-```  
-  File "main.py", line 8
-    fname = open(argv[1], 'a')
-                             ^
-IndentationError: unindent does not match any outer indentation level
-```  
-
+```
+>  File "main.py", line 8  
+>    fname = open(argv[1], 'a')  
+>                             ^  
+>IndentationError: unindent does not match any outer indentation level
+```
 看起来命令行提醒是对齐错误，检查前后的括号用法没有错误。  
 无意中选中全部代码，发现:
 ```
@@ -200,8 +199,89 @@ Bingo! 看来就是它了. 新增进代码中, 运行测试ok, 解决问题收�
 * 应该牢记任务目标，以最小成本完成任务。
 * 不断用Google 搜索错误代码/错误线索，搜索官方文档，可以更早解决问题。
 
+#### v3
 
+在广州现场听过大妈讲解这个编程任务的指导和期望后，明确了该程序的目标功能和采用的核心函数。
+
+* 目标功能
+    + 直接的无参数调用
+    + 直觉的默认帮助  ? /h /help
+    + 持续输入
+    + 直觉退出  q /quit
+    + 自动保存  
+* 采用的核心函数
+    + raw_input()
+    + while + break
+    + os.path.exists (参考《笨办法学Python》中习题17)
+    + Open()
+    + for .. in
+* < 50行的代码
+* 测试除错
+    + 能否在没有日记文件的情况下，运行程序正确记录在新的日记文件中
+    + 能否在日记正文中输入中文正确记录，并正常展示过往中文日记
+
+针对打印过往日记内容，输入本次日记两个模块，分别封装了2个函数：
+```
+def print_all_records(f):
+    line_count = 1
+    print 'Previous dairy records: \n'
+    for current_line in f:
+        print '%i - %s' % (line_count, current_line[:-1])
+        line_count +=1
+    print '=' * 20
+```
+  
+```
+def lines_inputs(f):
+    print 'Diary now... \n'
+    while True:
+        line = raw_input('Current >>> ')
+        if line == '?' or line == 'h' or line == 'H':
+            print '^-^ \n \t input ?/h/H for help \n \t input q/bye quit the Dairy progame'
+            continue
+        if line == 'q' or line == 'bye':
+            break
+        f.write(line + '\n')
+```
+
+运行测试，发现：
+```
+>  File "main.py", line 37  
+>    print '%i - %s' % (line_count, current_line)  
+>        ^  
+>IndentationError: expected an indented block  
+```
+* 检查几遍后仍提示该错误，马上想到可能自动对齐时Tab建与空格键混淆。[Sublime Text](http://www.sublimetext.com/)全选全部代码后查看果然，立马转换所有代码对齐采用空格。
+
+接着测试，发现：
+```
+>E:\projects\omooc2py\_src\om2py0w\0wex1>python main.py  
+>  File "main.py", line 57  
+>    if exists(log_name) = True:  
+>                        ^  
+>SyntaxError: invalid syntax  
+```
+这个错误没有什么好说，条件判断应该用双等号 ==. 单等号(=) 是赋值用的。立马改。  
+
+再测试:
+```
+>Diary now...
+>
+>Current >>> 试验下中文可以输入吗？
+>Traceback (most recent call last):
+>  File "main.py", line 68, in <module>
+>    main()
+>  File "main.py", line 60, in main
+>    lines_inputs(log_name)
+>  File "main.py", line 51, in lines_inputs
+>    f.write(line + '\n')
+>AttributeError: 'str' object has no attribute 'write'
+```
+参数传递错误，应该用current_file传递 给`lines_inputs()`函数，其他同参数名部分参照更改过来。
+
+Ok, 终于测试通过，最后附加到本开发文档这段曲折。
 
 ## 进展
-- 151021 Penguin 完成第一版
-- 151018 Penguin 写下思路
+- 151027 Penguin 完成v3
+- 151021 Penguin 完成v1, v2
+- 151018 Penguin 写下开发思路

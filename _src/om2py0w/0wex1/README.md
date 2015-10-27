@@ -1,26 +1,25 @@
-#Mini Diary Writer
+### Mini Diary Writer
+***
+***How to get started:***
 
-## Downloads  
+Mini diary writer needs the Python interpreter to run. So make sure you have it installed.
 
-[Mini Dairy Writer](https://github.com/penguinjing/OMOOC2py/_src/om2py0w/0wex1/main.py)
+* [Python interpreter](https://www.python.org/downloads/release/python-2710/)
 
-Please download the programe above to your computer first.
+Now download and copy the [Mini Dairy Writer](https://github.com/penguinjing/OMOOC2py/_src/om2py0w/0wex1/main.py) into a directory.
 
-[Python interpreter](https://www.python.org/downloads/release/python-2710/)
+***
 
-You will need to have Python interpreter to run the programme. If not sure, check it by typing`python` in command line. If it turns out bad file name or command, you'll need to downlad and install python interpreter first.
-
-## Usage
+***How to use it:***
 
 in command line(run cmd in start menu), enter the directory saved the main.py, then run below:  
 
-```Python main.py <diary name.txt>```
+`Python main.py`
 
-Type in what you want to say in line and hit ENTER key. It will save your words into a file of (diary name.txt) you put after the`Python main.py`.
+Type whatever you want to say in the dairy. It will be stored in a `mydairy.log` file. When you need to help, please enter ?/h/H. Quit the programme, enter q/bye.  
 
-When you need to quit, please input `finish`, then the programme will be terminated.
-
-## Reference
+***
+***Reference***
 
 [Dev log in Chinese](https://github.com/penguinjing/OMOOC2py/blob/master/draft/0wd4_1wd3Task.md)
 
