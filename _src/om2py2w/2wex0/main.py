@@ -48,7 +48,7 @@ def main():
 if __name__ == '__main__':
     main()
 '''
-import Tkinter
+from Tkinter import *
 
 class Application(Frame):
     def say_hi(self):
