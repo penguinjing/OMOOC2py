@@ -24,7 +24,7 @@ def lines_inputs(f):
     print 'Diary now... \n'
     while True:
         line = raw_input('Current >>> ')
-        if line.strip == '':
+        if line.strip() == '':
             continue
         if line == '?' or line == 'h' or line == 'H':
             print '^-^ \n \t input ?/h/H for help \n \t input q/bye quit the Dairy progame'
