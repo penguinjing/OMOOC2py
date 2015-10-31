@@ -17,7 +17,7 @@ def print_all_records(f):
     print 'Previous dairy records: \n'
     for current_line in f:
         print '%i - %s' % (line_count, current_line[:-1])
-        line_count +=1
+        line_count +=1 # line = line + 1
     print '=' * 20
 
 def lines_inputs(f):
@@ -40,11 +40,13 @@ def main():
         current_file = open(log_name, 'r+')
         print_all_records(current_file)
         lines_inputs(current_file)
+        current_file.close()
 
     else:
         current_file = open(log_name, 'w')
         print 'There are no previous dairy records:\n', '=' * 20
         lines_inputs(current_file)
+        current_file.close()
 
 if __name__ == '__main__':
     main()

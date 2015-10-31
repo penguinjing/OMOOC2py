@@ -13,7 +13,7 @@ from os.path import exists
 
 def print_all_records(f):
     line_count = 1
-    str_zh_cn = '过往日记内容'
+    str_zh_cn = u'过往日记内容'
     print '%s \n' % str_zh_cn
     for current_line in f:
         print '%i - %s' % (line_count, current_line[:-1])
