@@ -1,28 +1,4 @@
 # -*- coding: UTF-8 -*-*
-
-# Hello world - 1
-#import Tkinter
-#top = Tkinter.Tk()
-
-#top.mainloop()
-'''
-from Tkinter import *
-root = Tk()
-
-li = ['C', 'python', 'php', 'html', 'SQL', 'java']
-movie = ['CSS', 'jQuery', 'Bootstrap']
-listb = Listbox(root)
-listb2 = Listbox(root)
-for item in li:
-    listb.insert(0, item)
-
-for item in movie:
-    listb2.insert(0, item)
-
-listb.pack()
-listb2.pack()
-root.mainloop()
-'''
 '''
 from Tkinter import *
 
@@ -72,6 +48,7 @@ app = Application()
 app.master.title('Mini Diary Writer')
 app.mainloop()
 '''
+'''
 from Tkinter import *
 
 root = Tk()
@@ -79,4 +56,37 @@ root = Tk()
 label = Label(root, text = 'Hello World')
 label.pack()
 root.mainloop()
+'''
+# Hello world - 1
+#import Tkinter
+#top = Tkinter.Tk()
 
+#top.mainloop()
+'''
+from Tkinter import *
+root = Tk()
+
+li = ['C', 'python', 'php', 'html', 'SQL', 'java']
+movie = ['CSS', 'jQuery', 'Bootstrap']
+listb = Listbox(root)
+listb2 = Listbox(root)
+for item in li:
+    listb.insert(0, item)
+
+for item in movie:
+    listb2.insert(0, item)
+
+listb.pack()
+listb2.pack()
+root.mainloop()
+'''
+
+import Tkinter as tk
+
+App = tk.Tk()
+App.title('Mini Diary Writer')
+
+theLabel = tk.Label(App, text='这是我第二个图形程序This is my 2nd GUI programme')
+theLabel.pack()
+
+App.mainloop()
