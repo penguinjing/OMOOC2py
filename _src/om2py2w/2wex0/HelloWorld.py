@@ -54,6 +54,7 @@ app = Application(master=root)
 app.mainloop()
 root.destroy()
 '''
+'''
 import Tkinter as tk
 
 class Application(tk.Frame):
@@ -70,3 +71,12 @@ class Application(tk.Frame):
 app = Application()
 app.master.title('Mini Diary Writer')
 app.mainloop()
+'''
+from Tkinter import *
+
+root = Tk()
+
+label = Label(root, text = 'Hello World')
+label.pack()
+root.mainloop()
+
