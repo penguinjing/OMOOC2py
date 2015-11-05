@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 '''
 文件说明 
 - 一次接收输入一行日记
@@ -9,7 +8,6 @@
 作者信息 penguinjing
 版本自述 V3.0
 '''
-
 from os.path import exists
 
 def print_all_records(f):
@@ -35,18 +33,17 @@ def lines_inputs(f):
 
 def main():
     log_name = 'mydairy.log'
-
     if exists(log_name) == True:
         current_file = open(log_name, 'r+')
         print_all_records(current_file)
         lines_inputs(current_file)
-        current_file.close()
 
     else:
         current_file = open(log_name, 'w')
         print 'There are no previous dairy records:\n', '=' * 20
         lines_inputs(current_file)
-        current_file.close()
+        
+    current_file.close()
 
 if __name__ == '__main__':
     main()
