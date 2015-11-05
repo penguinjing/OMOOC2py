@@ -80,7 +80,48 @@ listb.pack()
 listb2.pack()
 root.mainloop()
 '''
+'''
+from os.path import exists
 
+def print_all_records(f):
+    line_count = 1
+    print 'Previous dairy records: \n'
+    for current_line in f:
+        print '%i - %s' % (line_count, current_line[:-1])
+        line_count +=1 # line = line + 1
+    print '=' * 20
+
+def lines_inputs(f):
+    print 'Diary now... \n'
+    while True:
+        line = raw_input('Current >>> ')
+        if line.strip() == '':
+            continue
+        if line == '?' or line == 'h' or line == 'H':
+            print '^-^ \n \t input ?/h/H for help \n \t input q/bye quit the Dairy progame'
+            continue
+        if line == 'q' or line == 'bye':
+            break
+        f.write(line + '\n')
+
+def main():
+    log_name = 'mydairy.log'
+    if exists(log_name) == True:
+        current_file = open(log_name, 'r+')
+        print_all_records(current_file)
+        lines_inputs(current_file)
+
+    else:
+        current_file = open(log_name, 'w')
+        print 'There are no previous dairy records:\n', '=' * 20
+        lines_inputs(current_file)
+        
+    current_file.close()
+
+if __name__ == '__main__':
+    main()
+
+'''
 import Tkinter as tk
 
 App = tk.Tk()
@@ -88,5 +129,8 @@ App.title('Mini Diary Writer')
 
 theLabel = tk.Label(App, text='这是我第二个图形程序This is my 2nd GUI programme')
 theLabel.pack()
+
+theText = tk.Text(App, text='Here is text frame')
+theText.pack()
 
 App.mainloop()

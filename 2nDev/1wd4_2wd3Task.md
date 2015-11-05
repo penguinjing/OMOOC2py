@@ -67,3 +67,49 @@ Ref：
 - Canvas
     - Allows fro simple primitive drawing within a Tk widget
     - Opens up the door for custom widget behavior
+
+
+GUI 101 安装    
+~ 极简交互式日记的桌面版本    
+需要安装嘛?  
+=> 不需要安装，采用python内置库Tkinter。需要时导入库，import   
+
+如何确认可生成标准桌面窗口?  
+=> 运行程序，出现标准窗口即可（最好带工具栏）    
+
+GUI 101 排版    
+~ 极简交互式日记的桌面版本    
+Tk 能使用什么控件?  
+=> Label, Entry, Button, Text,   
+
+我们的软件,需要哪几种?!  
+=> 我们需要Entry, Button, Text  
+
+怎么控制默认窗口的:  尺寸   
+=> 自动适应  
+
+控件位置  
+=> .pack() 方法  
+
+中文能显示嘛?    
+
+
+GUI 101 后台     
+~ 极简交互式日记的桌面版本    
+上周的 CLI 工具如何结合 Tk ?  
+能直接调用嘛?  
+=> 采用按button按钮控件，激发一个event, 由后台( .mainloop() )去捕捉，相应执行第一周已实现的代码块。    
+
+读取日记文件的print  
+=>替换为text 控件显示过往日记内容   
+
+ 提示用户输入文字的Raw_input  
+=>替换为entry控件及相应按钮        
+
+GUI 101 友好      
+~ 极简交互式日记的桌面版本    
+桌面软件的友好包含什么要素?  
+=> 包含窗口标题，包含最小化，最大化和关闭按钮。  
+
+在我们的软件中如何体现?  
+如何用最小成本体现?    

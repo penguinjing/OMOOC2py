@@ -4,6 +4,7 @@
 - [基础旋进](1sTry/README.md)
   + [0wd4 在线公开课笔记](1sTry/0wd4notebook.md)
   + [1wd4 在线公开课笔记](1sTry/1wd4notebook.md)
+  + [3wd4 在线公开课笔记](1sTry/3wd4notebook.md)
 - [迭代作品](2nDev/README.md)
   + [0wd4~1wd3 极简日记本程序开发](2nDev/0wd4_1wd3Task.md)
 - [人生首秀](3rDemo/README.md)
