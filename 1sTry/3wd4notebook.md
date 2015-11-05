@@ -8,9 +8,10 @@
 - 本方式强调快速开始写代码尽快运行程序看Python解释器反馈结果。  
 > 不要一直 **想** 如何构造好整个程序，先迈出第一步(写一小片段)，运行程序后一切看解释器反馈。根据运行结果调整自己的程序理解及思路，往上再扩展，最终达成全部功能。
 - 该方法好处：
-    - 最短时间内开始写代码。(看下文档里他人的代码demo片段即可开始，让使用Python这个轮子飞快地滚起来)
-    - 即时获得成功的反馈。(最小量的代码片段容易运行成功，这样产生正反馈激励自己使用Python)
+    - 最短时间内开始写代码，让使用Python这个轮子飞快地滚起来
+    - 即时获得成功的反馈，用正反馈激励自己使用Python
     - 每次试验的代码量小，容易调试也容易试探这一段代码的功能
+
 
 今天已经很晚，从明天开始我采用这一方式开始试验余下所有Python任务，记录下15分钟的行为及结果，如无头绪不要留恋，切换尝试步骤，快速开始写代码快速接受运行反馈。
 
@@ -33,15 +34,16 @@ cUrl 工具
 1. The Takahashi Method
 2. The Lessig Method
 3. The Godin Method
-4. The Monta Method
-[ref.](http://www.sliderocket.com/blog/2010/08/incredible-presentations-presentation-methods/)
+4. The Monta Method  
+
+[Ref.](http://www.sliderocket.com/blog/2010/08/incredible-presentations-presentation-methods/)
 
 #### [Google Python style Guide](http://zh-google-styleguide.readthedocs.org/en/latest/google-python-styleguide/contents/)
 - 看没看过？
 - 看过几次？
 - Get到哪几点？
 
-军规
+军规  
 1. 代码排版到能一眼知道有没有bug和设计问题  
 2. 当无法起个漂亮的变量名时已经有设计问题了  
 3. 
