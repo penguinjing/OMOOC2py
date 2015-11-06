@@ -31,10 +31,14 @@ Dogfooding
 cUrl 工具
 
 #### 幻灯片风格流派
-1. The Takahashi Method
-2. The Lessig Method
-3. The Godin Method
-4. The Monta Method  
+1. The Takahashi Method - 高桥流
+> 7x7 原则文字
+2. The Lessig Method - 莱斯格流
+> 全屏图配简单文字，说故事
+3. The Godin Method - 高汀流
+> 全图高清
+4. The Monta Method - 蒙塔流
+> 遮盖部分信息，引导观众思考后再揭示
 
 [Ref.](http://www.sliderocket.com/blog/2010/08/incredible-presentations-presentation-methods/)
 
