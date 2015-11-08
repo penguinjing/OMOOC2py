@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-*
 '''
+# 单一窗口，2按钮，'Quit' + 'Hello'(按下后Python解释器显示：hi there, everyone!)
 from Tkinter import *
 
 class Application(Frame):
@@ -31,6 +32,7 @@ app.mainloop()
 root.destroy()
 '''
 '''
+# 单一窗口，1按钮，'Quit'
 import Tkinter as tk
 
 class Application(tk.Frame):
@@ -49,6 +51,7 @@ app.master.title('Mini Diary Writer')
 app.mainloop()
 '''
 '''
+# 单一窗口，1 Label控件，显示Hello World 
 from Tkinter import *
 
 root = Tk()
@@ -63,6 +66,7 @@ root.mainloop()
 
 #top.mainloop()
 '''
+# 单一窗口，2 List控件，显示2列表内容。
 from Tkinter import *
 root = Tk()
 
@@ -122,15 +126,37 @@ if __name__ == '__main__':
     main()
 
 '''
+from os.path import exists
 import Tkinter as tk
 
-App = tk.Tk()
-App.title('Mini Diary Writer')
+def get_all_records(f):
+    content = 'All previous records: \n'
+    for current_line in f:
+        content = content + current_line[:-1] + '\n'
+    return content
 
-theLabel = tk.Label(App, text='这是我第二个图形程序This is my 2nd GUI programme')
-theLabel.pack()
+def main():
 
-theText = tk.Text(App, text='Here is text frame')
-theText.pack()
+    log_name = 'mydairy.log'
+    if exists(log_name) == True:
+        current_file = open(log_name, 'r+')
+        text_rec = get_all_records(current_file)
+        #lines_inputs(current_file)
 
-App.mainloop()
+    else:
+        current_file = open(log_name, 'w')
+        text_rec = 'There are no previous dairy records\n'
+        #lines_inputs(current_file)
+     
+    App = tk.Tk()
+    App.title('Mini Diary Writer')
+
+    theLabel = tk.Label(App, text=text_rec)
+    theLabel.pack()
+    #theEntry = tk.Entry(App, text='Here is text frame')
+    #theEntry.pack()
+    App.mainloop()
+    current_file.close()
+
+if __name__ == '__main__':
+    main()
