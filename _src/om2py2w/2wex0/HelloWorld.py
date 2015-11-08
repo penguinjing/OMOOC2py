@@ -153,8 +153,8 @@ def main():
 
     theLabel = tk.Label(App, text=text_rec)
     theLabel.pack()
-    #theEntry = tk.Entry(App, text='Here is text frame')
-    #theEntry.pack()
+    theEntry = tk.Entry(App, text='Here will be your new diary goes')
+    theEntry.pack()
     App.mainloop()
     current_file.close()
 
