@@ -152,7 +152,7 @@ def main():
     App.title('Mini Diary Writer')
 
     theLabel = tk.Label(App, text=text_rec)
-    theLabel.pack()
+    theLabel.pack(side='top', fill='both', expand=True)
     theEntry = tk.Entry(App, text='Here will be your new diary goes')
     theEntry.pack()
     App.mainloop()
