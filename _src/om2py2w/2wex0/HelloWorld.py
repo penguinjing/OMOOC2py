@@ -155,6 +155,8 @@ def main():
     theLabel.pack(side='top', fill='both', expand=True)
     theEntry = tk.Entry(App, text='Here will be your new diary goes')
     theEntry.pack()
+    ButtonQuit = tk.Button(App, text='Quit', command=quit)
+    ButtonQuit.pack()
     App.mainloop()
     current_file.close()
 
