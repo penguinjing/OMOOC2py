@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # An example of ttk using 
 # from https://frank-the-obscure.gitbooks.io/pythoncamp0/content/source/week10/tkinter.html
 

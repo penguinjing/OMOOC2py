@@ -23,39 +23,37 @@ def get_all_records(f):
         content = content + current_line[:-1] + '\n'
     return content
 
-#def save(f, line):
-#    f.write(line + '\n')
+def save(*args): 
+    line = content_input.get()
+    current_file.write(line + '\n')
 
-def main():
+log_name = 'mydairy.log'
 
-    log_name = 'mydairy.log'
-    if exists(log_name) == True:
-        current_file = open(log_name, 'r+')
-        text_rec = get_all_records(current_file)
-        #lines_inputs(current_file)
+if exists(log_name) == True:
+    current_file = open(log_name, 'r+')
+    text_rec = get_all_records(current_file)
+    #lines_inputs(current_file)
 
-    else:
-        current_file = open(log_name, 'w')
-        text_rec = 'There are no previous dairy records\n'
-        #lines_inputs(current_file)
-     
-    App = tk.Tk()
-    App.title('Mini Diary Writer')
+else:
+    current_file = open(log_name, 'w')
+    text_rec = 'There are no previous dairy records\n'
+    #lines_inputs(current_file)
+ 
+App = tk.Tk()
+App.title('Mini Diary Writer')
 
-    content_input = tk.StringVar()  #initil the variable for Entry wideget input
+content_input = tk.StringVar()  #initil the variable for Entry wideget input
 
-    theLabel = tk.Label(App, text=text_rec)
-    theLabel.pack(side='top', fill='both', expand=True)
-    TextEntry = tk.Entry(App, text='New diary goes', textvariable=content_input)
-    #feet_entry = ttk.Entry(mainframe, width=7, textvariable=feet)
-    TextEntry.pack()
-    ButtonWrite = tk.Button(App, text='Save into diary', command=save) #[TODO:Edward.hu]
-    ButtonQuit = tk.Button(App, text='Quit', command=quit)
-    ButtonWrite.pack()
-    ButtonQuit.pack()
-    App.mainloop()
-    current_file.close()
-    print 'current file was closed'
+theLabel = tk.Label(App, text=text_rec)
+theLabel.pack(side='top', fill='both', expand=True)
+TextEntry = tk.Entry(App, text='New diary goes', textvariable=content_input)
+#feet_entry = ttk.Entry(mainframe, width=7, textvariable=feet)
 
-if __name__ == '__main__':
-    main()
+TextEntry.pack()
+ButtonWrite = tk.Button(App, text='Save into diary', command=save(current_file)) #[TODO:Edward.hu]
+ButtonQuit = tk.Button(App, text='Quit', command=quit)
+ButtonWrite.pack()
+ButtonQuit.pack()
+App.mainloop()
+current_file.close()
+print 'current file was closed'

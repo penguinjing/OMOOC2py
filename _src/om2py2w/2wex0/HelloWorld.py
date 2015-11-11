@@ -139,7 +139,7 @@ def get_all_records(f):
         content = content + current_line[:-1] + '\n'
     return content
 
-def save(f, line):
+def save(f): 
     f.write(line + '\n')
 
 def main():
