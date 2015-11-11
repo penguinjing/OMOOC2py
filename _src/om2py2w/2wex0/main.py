@@ -27,7 +27,7 @@ def save(*args):
     line = content_input.get()
     current_file.write(line + '\n')
 
-log_name = 'mydairy.log'
+log_name = 'mydiary.log'
 
 if exists(log_name) == True:
     current_file = open(log_name, 'r+')

@@ -34,7 +34,7 @@ def lines_inputs(f):
         f.write(line + '\n')
 
 def main():
-    log_name = 'mydairy.log'
+    log_name = 'mydiary.log'
 
     if exists(log_name) == True:
         current_file = open(log_name, 'r+')
