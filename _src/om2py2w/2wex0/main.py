@@ -14,6 +14,7 @@
 from os.path import exists 
 import Tkinter as tk  # import Tkinter module
 import sys
+
 reload(sys)
 sys.setdefaultencoding('utf-8')  # supporting Chinese display in label widget(or maybe in whole frame)
 
@@ -50,7 +51,7 @@ TextEntry = tk.Entry(App, text='New diary goes', textvariable=content_input)
 #feet_entry = ttk.Entry(mainframe, width=7, textvariable=feet)
 
 TextEntry.pack()
-ButtonWrite = tk.Button(App, text='Save into diary', command=save(current_file)) #[TODO:Edward.hu]
+ButtonWrite = tk.Button(App, text='Save into diary', command=save) #[TODO:Edward.hu]
 ButtonQuit = tk.Button(App, text='Quit', command=quit)
 ButtonWrite.pack()
 ButtonQuit.pack()
