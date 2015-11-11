@@ -126,14 +126,21 @@ if __name__ == '__main__':
     main()
 
 '''
+
 from os.path import exists
 import Tkinter as tk
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 def get_all_records(f):
     content = 'All previous records: \n'
     for current_line in f:
         content = content + current_line[:-1] + '\n'
     return content
+
+def save(f, line):
+    f.write(line + '\n')
 
 def main():
 
@@ -151,14 +158,20 @@ def main():
     App = tk.Tk()
     App.title('Mini Diary Writer')
 
+    content_input = tk.StringVar()
+
     theLabel = tk.Label(App, text=text_rec)
     theLabel.pack(side='top', fill='both', expand=True)
-    theEntry = tk.Entry(App, text='Here will be your new diary goes')
-    theEntry.pack()
+    TextEntry = tk.Entry(App, text='New diary goes', textvariable=content_input)
+    #feet_entry = ttk.Entry(mainframe, width=7, textvariable=feet)
+    TextEntry.pack()
+    ButtonWrite = tk.Button(App, text='Save into diary', command=save) #[TODO:Edward.hu]
     ButtonQuit = tk.Button(App, text='Quit', command=quit)
+    ButtonWrite.pack()
     ButtonQuit.pack()
     App.mainloop()
     current_file.close()
+    print 'current file was closed'
 
 if __name__ == '__main__':
     main()

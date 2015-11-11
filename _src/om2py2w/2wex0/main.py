@@ -2,134 +2,60 @@
 #! /usr/bin/env python
 '''
 文件说明 
-- 一次接收输入一行日记
-- 保存为本地文件
-- 再次运行系统时，能打印出过往的所有日记
+- 在上周开发基础上，完成极简交互式笔记的桌面版本
+- 需求如下：
+    - 每次运行时合理打印出过往的所有笔记
+    - 一次接受输入一行笔记
+    - 保存为本地文件
 
 作者信息 penguinjing
-版本自述 V3.0
+版本自述 V1.0
 '''
-'''
-from os.path import exists
+from os.path import exists 
+import Tkinter as tk  # import Tkinter module
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')  # supporting Chinese display in label widget(or maybe in whole frame)
 
-def print_all_records(f):
-    line_count = 1
-    print 'Previous dairy records: \n'
+def get_all_records(f):
+    content = 'All previous records: \n'
     for current_line in f:
-        print '%i - %s' % (line_count, current_line[:-1])
-        line_count +=1
-    print '=' * 20
+        content = content + current_line[:-1] + '\n'
+    return content
 
-def lines_inputs(f):
-    print 'Diary now... \n'
-    while True:
-        line = raw_input('Current >>> ')
-        if line.strip() == '':
-            continue
-        if line == '?' or line == 'h' or line == 'H':
-            print '^-^ \n \t input ?/h/H for help \n \t input q/bye quit the Dairy progame'
-            continue
-        if line == 'q' or line == 'bye':
-            break
-        f.write(line + '\n')
+#def save(f, line):
+#    f.write(line + '\n')
 
 def main():
-    log_name = 'mydairy.log'
 
+    log_name = 'mydairy.log'
     if exists(log_name) == True:
         current_file = open(log_name, 'r+')
-        print_all_records(current_file)
-        lines_inputs(current_file)
+        text_rec = get_all_records(current_file)
+        #lines_inputs(current_file)
 
     else:
         current_file = open(log_name, 'w')
-        print 'There are no previous dairy records:\n', '=' * 20
-        lines_inputs(current_file)
+        text_rec = 'There are no previous dairy records\n'
+        #lines_inputs(current_file)
+     
+    App = tk.Tk()
+    App.title('Mini Diary Writer')
+
+    content_input = tk.StringVar()  #initil the variable for Entry wideget input
+
+    theLabel = tk.Label(App, text=text_rec)
+    theLabel.pack(side='top', fill='both', expand=True)
+    TextEntry = tk.Entry(App, text='New diary goes', textvariable=content_input)
+    #feet_entry = ttk.Entry(mainframe, width=7, textvariable=feet)
+    TextEntry.pack()
+    ButtonWrite = tk.Button(App, text='Save into diary', command=save) #[TODO:Edward.hu]
+    ButtonQuit = tk.Button(App, text='Quit', command=quit)
+    ButtonWrite.pack()
+    ButtonQuit.pack()
+    App.mainloop()
+    current_file.close()
+    print 'current file was closed'
 
 if __name__ == '__main__':
     main()
-'''
-
-# Hello world by https://docs.python.org/2.7/library/tkinter.html
-'''
-from Tkinter import *
-
-class Application(Frame):
-    def say_hi(self):
-        print "hi there, everyone!"
-
-    def createWidgets(self):
-        self.QUIT = Button(self)
-        self.QUIT["text"] = "QUIT"
-        self.QUIT["fg"] = "red"
-        self.QUIT["command"] = self.quit
-
-        self.QUIT.pack({"side": "left"})
-
-        self.hi_there = Button(self)
-        self.hi_there["text"] = "Hello",
-        self.hi_there["command"] = self.say_hi
-
-        self.hi_there.pack({"side": "left"})
-
-    def __init__(self, master = None):
-        Frame.__init__(self, master)
-        self.pack()
-        self.createWidgets()
-
-root = Tk()
-app = Application(master=root)
-app.mainloop()
-root.destroy()
-'''
-'''
-# Hello world by liaoxuefeng
-from Tkinter import *
-class Application(Frame):
-    def __init__(self, master=None):
-        Frame.__init__(self, master)
-        self.pack()
-        self.createWidgets()
-
-    def createWidgets(self):
-        self.helloLabel = Label(self, text='Hello, world!')
-        self.helloLabel.pack()
-        self.quitButton = Button(self, text='Quit', command=self.quit)
-        self.quitButton.pack()
-
-app = Application()
-#设置窗口标题:
-app.master.title('Mini Dairy')
-#主消息循环:
-app.mainloop()
-'''
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-'a hello world GUI example.'
-
-from Tkinter import *
-import tkMessageBox
-
-class Application(Frame):
-    def __init__(self, master=None):
-        Frame.__init__(self, master)
-        self.pack()
-        self.createWidgets()
-
-    def createWidgets(self):
-        self.nameInput = Entry(self)
-        self.nameInput.pack()
-        self.alertButton = Button(self, text='Enter', command=self.hello)
-        self.alertButton.pack()
-        
-            
-        
-    def hello(self):
-        name = self.nameInput.get() or 'world'
-        tkMessageBox.showinfo('Message', 'Hello, %s' % name)
-
-app = Application()
-app.master.title('Hello World')
-# 主消息循环:
-app.mainloop()
