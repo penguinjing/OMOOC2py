@@ -74,17 +74,18 @@ def createserver():
     s.close()
 
 def main(): 
-	print 'python main.py [s|c]'
-	print '       s - server mode'
-	print '       c - client mode'
-
   	if argv[1] = 'c':
    		createudp()
-   		break
 
 	elif argv[1] = 's':
    		createserver()
-   		break
+
+   	else:
+   		print 'no specify mode, please run it again.'
+		print 'python main.py [s|c]'
+		print '       s - server mode'
+		print '       c - client mode'
+
 
 if __name__ == "__main__": 
     main()
