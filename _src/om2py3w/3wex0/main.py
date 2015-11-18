@@ -24,10 +24,12 @@ def setupserver():
     server_address = ('localhost', 9009)
     print >>sys.stderr, 'starting up on %s port %s' % server_address
     sock.bind(server_address)
+    counter = 1
     
     while True:
         print >>sys.stderr, '\nwaiting to receive message'
         data, address = sock.recvfrom(4096)
+        print counter
         
         print >>sys.stderr, 'received %s bytes from %s' % (len(data), address)
         print >>sys.stderr, data
@@ -35,6 +37,7 @@ def setupserver():
         if data:
             sent = sock.sendto(data, address)
             print >>sys.stderr, 'sent %s bytes back to %s' % (sent, address)
+        counter +=1
 
 def setupclient():
     # Echo client program part
@@ -42,7 +45,7 @@ def setupclient():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
 
     server_address = ('localhost', 9009)
-    message = 'This is the message.  It will be repeated.'  
+    message = raw_input('What message would like to sent? \n >>>' )
 
     try:    
 
@@ -59,19 +62,25 @@ def setupclient():
         print >>sys.stderr, 'closing socket'
         sock.close()
 
+def print_usage():
+    print 'no or wrong specify mode, please run it again.'
+    print 'python main.py [s|c]'
+    print '\t\ts - server m'
+    print '\t\tc - client mode'
+
 def main(): 
-    if argv[1] = 'c':
+    if len(sys.argv) == 1:
+        print_usage()
+
+    elif sys.argv[1] == 'c':
         setupclient()
 
-    elif argv[1] = 's':
+    elif sys.argv[1] == 's':
         setupserver()
 
     else:
-        print 'no specify mode, please run it again.'
-        print 'python main.py [s|c]'
-        print '       s - server mode'
-        print '       c - client mode'
-
+        print_usage()
+        
 # 自检区
 if __name__ == "__main__": 
     main()
