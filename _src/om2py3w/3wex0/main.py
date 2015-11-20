@@ -9,11 +9,34 @@
 # 全局引用
 import socket
 import sys
+from os.path import exists
 
 # 全局变量
 # PATH = "/path/2/work dir"
-
 # 函式撰写区
+
+def print_usage():
+    print 'no or wrong specify mode, please run it again.'
+    print 'python main.py [s|c]'
+    print '\t\t| |'
+    print '\t\t| - client mode'
+    print '\t\t- - server mode'
+
+def print_help():
+    print "?/h/H - print help"
+    print "q/quit/bye - quit the Notes"
+    print "r/sync - synchorme history notes"
+
+def read_all_records():
+    log_name = 'mydiary.log'
+    if exists(log_name) == True:
+        current_file = open(log_name)
+        his_content = current_file.read()
+        current_file.close()
+    else:
+        his_content = 'no historical notes'
+
+    return his_content
 
 def setupserver():
     # Echo Server programe part
@@ -24,20 +47,34 @@ def setupserver():
     server_address = ('localhost', 9009)
     print >>sys.stderr, 'starting up on %s port %s' % server_address
     sock.bind(server_address)
-    counter = 1
-    
+    print >>sys.stderr, '\nwaiting to receive notes:'
+    print >>sys.stderr, 'Hit Ctrl + C to interrupt'
+
     while True:
-        print >>sys.stderr, '\nwaiting to receive message'
         data, address = sock.recvfrom(4096)
-        print counter
-        
-        print >>sys.stderr, 'received %s bytes from %s' % (len(data), address)
-        print >>sys.stderr, data
-        
-        if data:
-            sent = sock.sendto(data, address)
-            print >>sys.stderr, 'sent %s bytes back to %s' % (sent, address)
-        counter +=1
+        #print >>sys.stderr, 'received %s bytes from %s' % (len(data), address)
+      
+        if data in ['r', 'sync']:
+            content = read_all_records()
+            sock.sendto(content, address)
+            continue
+            # print >>sys.stderr, 'sent %s bytes back to %s' % (sent, address)
+            
+        if data == 'shutdown':
+            print >>sys.stderr, '\nshuting down the server...'
+            break
+
+        else: 
+            log_name = 'mydiary.log'
+            current_file = open(log_name, 'a+')
+            print >>sys.stderr, data
+            current_file.write(data+'\n')
+            current_file.close()
+
+    print >>sys.stderr, 'closing socket'
+    sock.close()
+    current_file.close()
+
 
 def setupclient():
     # Echo client program part
@@ -45,28 +82,30 @@ def setupclient():
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
 
     server_address = ('localhost', 9009)
-    message = raw_input('What message would like to sent? \n >>>' )
+    while True:
+        message = raw_input('>>>' )    
 
-    try:    
+        if message in ['r', 'sync']:
+            #print >>sys.stderr, 'waiting to receive'
+            sock.sendto(message, server_address) 
+            data, server = sock.recvfrom(4096)
+            print >>sys.stderr, data
+            continue
 
-        # Send data
-        print >>sys.stderr, 'sending "%s"' % message
-        sent = sock.sendto(message, server_address) 
+        if message in ['?', 'h', 'H']:
+            print_help()
 
-        # Receive response
-        print >>sys.stderr, 'waiting to receive'
-        data, server = sock.recvfrom(4096)
-        print >>sys.stderr, 'received "%s"' % data  
+        if message in ['q', 'quit', 'bye']:
+            break
+        else: 
+        #Send data
+        #print >>sys.stderr, 'sending "%s"' % message
+            sock.sendto(message, server_address) 
 
-    finally:
-        print >>sys.stderr, 'closing socket'
-        sock.close()
 
-def print_usage():
-    print 'no or wrong specify mode, please run it again.'
-    print 'python main.py [s|c]'
-    print '\t\ts - server m'
-    print '\t\tc - client mode'
+    print >>sys.stderr, 'closing socket'
+    sock.close()
+
 
 def main(): 
     if len(sys.argv) == 1:
