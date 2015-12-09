@@ -36,43 +36,33 @@ def read_all_records():
         current_file.close()
     else:
         his_content = 'no historical notes'
-
     return his_content
 
 def setupserver():
     # Echo Server programe part
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
+    local_address = socket.gethostbyname(socket.getfqdn())
     # Bind the socket to the port
-    server_address = ('localhost', 9009)
-    print >>sys.stderr, 'starting up on %s port %s' % server_address
+    server_address = (local_address, 9009)
+    print >>sys.stderr, 'starting up server on %s port %s' % server_address
     sock.bind(server_address)
-    print >>sys.stderr, '\nwaiting to receive notes:'
     print >>sys.stderr, 'Hit Ctrl + C to interrupt'
+    print >>sys.stderr, '\nwaiting to receive notes:'
+
 
     while True:
         data, address = sock.recvfrom(4096)
         #print >>sys.stderr, 'received %s bytes from %s' % (len(data), address)
       
         if data in ['r', 'sync']:
-            print >>sys.stderr, 'here goes server received r or sync'
             content = read_all_records()
             sock.sendto(content, address)
             continue
-            # print >>sys.stderr, 'sent %s bytes back to %s' % (sent, address)
-
-        elif data in ['?', 'h', 'H']:
-            print >>sys.stderr, 'here goes server received ?, h or H'
-            continue
-
         elif data == 'shutdown':
-            print >>sys.stderr, 'here goes server received shutdown'
             print >>sys.stderr, '\nshuting down the server...'
             break
-
         else: 
-            print >>sys.stderr, 'here goes server received anything else'
             log_name = 'mydiary.log'
             current_file = open(log_name, 'a+')
             print >>sys.stderr, data
@@ -81,55 +71,40 @@ def setupserver():
 
     print >>sys.stderr, 'closing socket'
     sock.close()
-    current_file.close()
-
 
 def setupclient():
     # Echo client program part
     # Create a UDP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) 
+    address = raw_input('Please input Notes server address:')
 
-    server_address = ('localhost', 9009)
+    server_address = (address, 9009)
     while True:
         message = raw_input('>>>' )    
-
         if message in ['r', 'sync']:
-            print >>sys.stderr, 'here goes client sending r or sync'
             sock.sendto(message, server_address) 
             data, server = sock.recvfrom(4096)
             print >>sys.stderr, data
             continue
-
         elif message in ['?', 'h', 'H']:
-            print >>sys.stderr, 'here goes client sending ?, h or H'
             print_help()
             continue
-
         elif message in ['q', 'quit', 'bye']:
-            print >>sys.stderr, 'here goes client sending q, quit or bye'
             break
-
+        elif message =='':
+            continue
         else: 
-        #Send data
-        #print >>sys.stderr, 'sending "%s"' % message
-            print >>sys.stderr, 'here goes client sending the raw inputs'
             sock.sendto(message, server_address) 
-
-
     print >>sys.stderr, 'closing socket'
     sock.close()
-
 
 def main(): 
     if len(sys.argv) == 1:
         print_usage()
-
     elif sys.argv[1] == 'c':
         setupclient()
-
     elif sys.argv[1] == 's':
         setupserver()
-
     else:
         print_usage()
         
