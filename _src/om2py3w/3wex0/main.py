@@ -3,7 +3,7 @@
 '''
 文件说明： 这是个Net局域网版本的极简交互式笔记程序
 作者信息： penguinjing
-版本自述:  0.0.1
+版本自述:  0.0.2
 程序参考： https://pymotw.com/2/socket/udp.html
 '''
 # 全局引用
@@ -26,6 +26,7 @@ def print_help():
     print "?/h/H - print help"
     print "q/quit/bye - quit the Notes"
     print "r/sync - synchorme history notes"
+    print "shutdown - shuting down the server"
 
 def read_all_records():
     log_name = 'mydiary.log'
@@ -55,16 +56,23 @@ def setupserver():
         #print >>sys.stderr, 'received %s bytes from %s' % (len(data), address)
       
         if data in ['r', 'sync']:
+            print >>sys.stderr, 'here goes server received r or sync'
             content = read_all_records()
             sock.sendto(content, address)
             continue
             # print >>sys.stderr, 'sent %s bytes back to %s' % (sent, address)
-            
-        if data == 'shutdown':
+
+        elif data in ['?', 'h', 'H']:
+            print >>sys.stderr, 'here goes server received ?, h or H'
+            continue
+
+        elif data == 'shutdown':
+            print >>sys.stderr, 'here goes server received shutdown'
             print >>sys.stderr, '\nshuting down the server...'
             break
 
         else: 
+            print >>sys.stderr, 'here goes server received anything else'
             log_name = 'mydiary.log'
             current_file = open(log_name, 'a+')
             print >>sys.stderr, data
@@ -86,20 +94,25 @@ def setupclient():
         message = raw_input('>>>' )    
 
         if message in ['r', 'sync']:
-            #print >>sys.stderr, 'waiting to receive'
+            print >>sys.stderr, 'here goes client sending r or sync'
             sock.sendto(message, server_address) 
             data, server = sock.recvfrom(4096)
             print >>sys.stderr, data
             continue
 
-        if message in ['?', 'h', 'H']:
+        elif message in ['?', 'h', 'H']:
+            print >>sys.stderr, 'here goes client sending ?, h or H'
             print_help()
+            continue
 
-        if message in ['q', 'quit', 'bye']:
+        elif message in ['q', 'quit', 'bye']:
+            print >>sys.stderr, 'here goes client sending q, quit or bye'
             break
+
         else: 
         #Send data
         #print >>sys.stderr, 'sending "%s"' % message
+            print >>sys.stderr, 'here goes client sending the raw inputs'
             sock.sendto(message, server_address) 
 
 
