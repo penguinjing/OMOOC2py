@@ -14,9 +14,10 @@ from bottle import route, run, template
 # 函式撰写区
 
 #from bottle import route, run, template
-
+@route('/')
 @route('/hello/<name>')
-def index(name):
-    return template('<b>Hello {{name}}</b>!', name=name)
+def index(name='Stranger'):
+    return template('<b>Hello {{name}}, how are you? </b>!'
+                    , name=name)
 
 run(host='localhost', port=8080)
